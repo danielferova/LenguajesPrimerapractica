@@ -1,139 +1,81 @@
-//variables var para mis letras, numeros y simbolos
-var cadena1;
-var letras = document.getElementById("letras");
-var numeros = document.getElementById("numeros");
-var simbolos = document.getElementById("simbolos");
 
-var tipo = "-ERROR-";
-var nLetras = 0, nSim = 0, nNumeros = 0, nCadena = false;
+//funcion la que va a iniciar la cadena o texto con la alerta llamando al identificador
+function revisar(){
+    //variables
+    var cadena = document.getElementById("cadena").value; //para escribir o la referemcia del primer objeto o ID cadena
+    var listado = document.getElementById("listado");
+    var text1 = new String(cadena);
+    if(text1.charCodeAt(0)>= 65 && text1.charCodeAt(0) <= 90 | text1.charCodeAt(0)>=97 && text1.charCodeAt(0) <= 122){
+        evaluarIdentificador(text1);
+    }
+    if(text1.charCodeAt(0)>= 48 && text1.charCodeAt(0) <=59){
+        evaluarNumero(text1);
+    }
+    if((text1.charCodeAt(0)>=33 && text1.charCodeAt(0)<=47)) {
+        evaluarSimbolo(text1);
+    } 
+    }
+//funcion para evaluar  la letra y error
+function evaluarIdentificador(text1)
+{
+    var integridad=true;
+    for (var index = 1; index < text1.length; index++) {
+        if((text1.charCodeAt(index)>= 65 & text1.charCodeAt(index) <= 90) | 
+        (text1.charCodeAt(index)>=97 & text1.charCodeAt(index) <= 122) |
+        (text1.charCodeAt(index)>= 48 & text1.charCodeAt(index) <=59)){
 
-//la que va a iniciar con la alerta
-function practicaDaniel(){
+        }else{
+            alert("NO ACEPTADO"); //alerta para verificar que ha no ha sido aceptado
+            integridad =false;
+            break;
+        }
+    }
     
-    if(cadena == ""){
-        alert("casilla");
+    if(integridad==true){
+        listado.innerHTML = listado.innerHTML + "<li class=\"list-group-item\">"+"Identificador"+"</li>";
     }
-    else{
-        identificador();
+    if(integridad==false){
+        listado.innerHTML = listado.innerHTML + "<li class=\"list-group-item\">"+"Error"+"</li>";
     }
+
 
 }
+//funcion para mostrar numeros o error
+function evaluarNumero(text1){
+    var integridad=true;
+    for (var index = 1; index < text1.length; index++) {
+        if(text1.charCodeAt(index)>= 48 && text1.charCodeAt(index) <=59){
 
-//para comparar y analizar, e identificar si es letra, numero o simbolo
-function identificador(){
-    var cadena = document.getElementById("cadena").value;
-    var cadena2 = new String(cadena);
-    var contNum = 0;
-    var contLetras = 0;
-    var contSimbolo = 0;
-    for(var i = 0; i < cadena2.length; i++){
-        if(cadena2.charCodeAt(i)>= 65 && cadena2.charCodeAt(i) <= 90 || cadena2.charCodeAt(i)>=97 && cadena2.charCodeAt(i) <= 122){
-            
-            contLetras++;
+        }else{
+            alert("NO ACEPTADO");
+            integridad =false;
+            break;
         }
-        else if(cadena2.charCodeAt(i)>= 48 && cadena2.charCodeAt(i) <=59   ){
-           contNum++;
-        }
-        else if((cadena2.charCodeAt(i)>=32 && cadena2.charCodeAt(i)<=47) || (cadena2.charCodeAt(i)>=58 && cadena2.charCodeAt(i)<=64) || (cadena2.charCodeAt(i)>=91 && cadena2.charCodeAt(i)<=96) || (cadena2.charCodeAt(i)>=123 && cadena2.charCodeAt(i)<=126)) {
-            contSimbolo++;
-        } 
-        
     }
-
-// Me lo irá escribiendo en mi tabla que tengo en mi HTML
-
-    if((contNum)==cadena2.length){
-        console.log("NUMERO") //solo para verificar que me lo esta comparando
-     
-        var numero = "Numeros";
-        document.getElementById("tbl").insertRow(-1).innerHTML = '<tr><td></td><td>'+cadena2+'</td><td>'+numero+'</td><td></td></tr>';
-        alert("Numeros")
-
-    }else if((contLetras)==cadena2.length){
-        
-        console.log("LETRAS")
-        var letra = "Letras";
-        document.getElementById("tbl").insertRow(-1).innerHTML = '<tr><td></td><td>'+cadena2+'</td><td>'+letra+'</td><td></td></tr>';
-        alert("Letras")
-   
-    }else if((contSimbolo)==cadena2.length){
-
-        console.log("SIMBOLO")
-        var simbolo = "Letras";
-        document.getElementById("tbl").insertRow(-1).innerHTML = '<tr><td></td><td>'+cadena2+'</td><td>'+simbolo+'</td><td></td></tr>';
-        alert("Simbolo")
-       
-    }else{
-
-        console.log("ERROR")
-        var error = "Error";
-        document.getElementById("tbl").insertRow(-1).innerHTML = '<tr><td></td><td>'+cadena2+'</td><td>'+error+'</td><td></td></tr>';
-        alert("Error")
-       
+    
+    if(integridad==true){
+        listado.innerHTML = listado.innerHTML + "<li class=\"list-group-item\">"+"Numero"+"</li>";
+    }
+    if(integridad==false){
+        listado.innerHTML = listado.innerHTML + "<li class=\"list-group-item\">"+"Error"+"</li>";
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
+//funcion para mostrar simbolo y error
+function evaluarSimbolo(text1){
+    var integridad=true;
+    for (var index = 1; index < text1.length; index++) {
+        if((text1.charCodeAt(index)>=33 && text1.charCodeAt(index)<=47)) {
+
+        }else{
+            alert("NO ACEPTADO");
+            integridad =false;
+            break;
+        }
+    }
+    
+    if(integridad==true){
+        listado.innerHTML = listado.innerHTML + "<li class=\"list-group-item\">"+"Simbolo"+"</li>";
+    }if(integridad==false){
+        listado.innerHTML = listado.innerHTML + "<li class=\"list-group-item\">"+"Error"+"</li>";
+    }
+}
